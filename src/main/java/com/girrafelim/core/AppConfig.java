@@ -1,6 +1,8 @@
 package com.girrafelim.core;
 
+import com.girrafelim.core.discount.DiscountPolicy;
 import com.girrafelim.core.discount.FixDiscountPolicy;
+import com.girrafelim.core.member.MemberRepository;
 import com.girrafelim.core.member.MemberService;
 import com.girrafelim.core.member.MemberServiceImpl;
 import com.girrafelim.core.member.MemoryMemberRepository;
@@ -14,11 +16,18 @@ import com.girrafelim.core.order.OrderServiceImpl;
 public class AppConfig {
 
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    private MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
     }
 
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    public DiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
+    }
 }
