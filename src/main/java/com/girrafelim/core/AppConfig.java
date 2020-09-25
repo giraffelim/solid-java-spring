@@ -2,6 +2,7 @@ package com.girrafelim.core;
 
 import com.girrafelim.core.discount.DiscountPolicy;
 import com.girrafelim.core.discount.FixDiscountPolicy;
+import com.girrafelim.core.discount.RateDiscountPolicy;
 import com.girrafelim.core.member.MemberRepository;
 import com.girrafelim.core.member.MemberService;
 import com.girrafelim.core.member.MemberServiceImpl;
@@ -28,6 +29,6 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 }
